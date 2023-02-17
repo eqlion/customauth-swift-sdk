@@ -103,35 +103,35 @@ open class CustomAuth {
 
     open func handleSingleLogins(controller: UIViewController?, modalPresentationStyle: UIModalPresentationStyle = .fullScreen) async throws -> [String: Any] {
         if let subVerifier = subVerifierDetails.first {
-            let loginURL = subVerifier.getLoginURL()
-            await openURL(url: loginURL, view: controller, modalPresentationStyle: modalPresentationStyle)
-            let url = await withUnsafeContinuation({ continuation in
-                observeCallback { url in
-                    continuation.resume(returning: url)
-                }
-            })
+//            let loginURL = subVerifier.getLoginURL()
+//            await openURL(url: loginURL, view: controller, modalPresentationStyle: modalPresentationStyle)
+//            let url = await withUnsafeContinuation({ continuation in
+//                observeCallback { url in
+//                    continuation.resume(returning: url)
+//                }
+//            })
+            
+            let response: [String: String] = ["id_token": subVerifier.idToken]
 
-            let responseParameters = self.parseURL(url: url)
-            os_log("ResponseParams after redirect: %@", log: getTorusLogger(log: CASDKLogger.core, type: .info), type: .info, responseParameters)
-                    do {
-                        let newData = try await subVerifier.getUserInfo(responseParameters: responseParameters)
-                        os_log("getUserInfo newData: %@", log: getTorusLogger(log: CASDKLogger.core, type: .info), type: .info, newData)
-                        var data = newData
-                        let verifierId = data["verifierId"] as! String
-                        let idToken = data["tokenForKeys"] as! String
-                        data.removeValue(forKey: "tokenForKeys")
-                        data.removeValue(forKey: "verifierId")
-                        let torusKey = try await getTorusKey(verifier: self.aggregateVerifier, verifierId: verifierId, idToken: idToken, userData: data)
-                        return torusKey
-                    } catch {
-                        os_log("handleSingleLogin: err: %s", log: getTorusLogger(log: CASDKLogger.core, type: .error), type: .error, error.localizedDescription)
-                        throw error
-                    }
-
-            // Open in external safari
-                }
-        throw CASDKError.unknownError
+//            let responseParameters = self.parseURL(url: url)
+            os_log("ResponseParams after redirect: %@", log: getTorusLogger(log: CASDKLogger.core, type: .info), type: .info, response)
+            do {
+                let newData = try await subVerifier.getUserInfo(responseParameters: response)
+                os_log("getUserInfo newData: %@", log: getTorusLogger(log: CASDKLogger.core, type: .info), type: .info, newData)
+                var data = newData
+                let verifierId = data["verifierId"] as! String
+                let idToken = data["tokenForKeys"] as! String
+                data.removeValue(forKey: "tokenForKeys")
+                data.removeValue(forKey: "verifierId")
+                let torusKey = try await getTorusKey(verifier: self.aggregateVerifier, verifierId: verifierId, idToken: idToken, userData: data)
+                return torusKey
+            } catch {
+                os_log("handleSingleLogin: err: %s", log: getTorusLogger(log: CASDKLogger.core, type: .error), type: .error, error.localizedDescription)
+                throw error
+            }
         }
+        throw CASDKError.unknownError
+    }
 
     open func handleSingleIdVerifier(controller: UIViewController?, modalPresentationStyle: UIModalPresentationStyle = .fullScreen) async throws -> [String: Any] {
         if let subVerifier = subVerifierDetails.first {

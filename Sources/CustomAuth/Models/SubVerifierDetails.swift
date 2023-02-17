@@ -22,6 +22,7 @@ public struct SubVerifierDetails {
     public let redirectURL: String
     public let handler: AbstractLoginHandler
     public var urlSession: URLSession
+    public var idToken: String
 
     public enum codingKeys: String, CodingKey {
         case clientId
@@ -36,6 +37,13 @@ public struct SubVerifierDetails {
         self.verifier = verifier
         self.redirectURL = redirectURL
         self.urlSession = urlSession
+        
+        if let jwt = jwtParams["id_token"] {
+            idToken = jwt
+        } else {
+            idToken = ""
+        }
+        
         handler = self.loginProvider.getHandler(loginType: loginType, clientID: self.clientId, redirectURL: self.redirectURL, browserRedirectURL: browserRedirectURL, jwtParams: jwtParams, urlSession: urlSession)
     }
 
