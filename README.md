@@ -10,8 +10,8 @@ interactions with the Torus Network
 
 ## Features
 
-- All API's return Promises (mxcl/PromiseKit). You can import
-  "yannickl/AwaitKit" to convert APIs to async/await format.
+-   All API's return Promises (mxcl/PromiseKit). You can import
+    "yannickl/AwaitKit" to convert APIs to async/await format.
 
 ## 🩹 Examples
 
@@ -40,7 +40,7 @@ let package = Package(
 #### Cocoapods
 
 ```ruby
-pod 'CustomAuth', '~> 5.0.0'
+pod 'CustomAuth', '~> 5.0.1'
 ```
 
 #### Manual import or other packages
@@ -98,7 +98,7 @@ In the info tab of your target, add your application name (ex. my-wallet-app).
 Add the redirect URL to the list of allowed redirect URLs in the OAuth providers
 settings page.
 
-- For SwiftUI, without using delegate (iOS 14+)
+-   For SwiftUI, without using delegate (iOS 14+)
 
 ```swift
 .onOpenURL { url in
@@ -109,7 +109,7 @@ settings page.
 }
 ```
 
-- For SwiftUI, implement the following in your SceneDelegate
+-   For SwiftUI, implement the following in your SceneDelegate
 
 ```swift
 func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -120,7 +120,7 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 }
 ```
 
-- For Storyboard, implement the following in your app AppDelegate:
+-   For Storyboard, implement the following in your app AppDelegate:
 
 ```swift
 func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -138,7 +138,7 @@ your app or to your website. Checkout
 [Documentation](https://developer.apple.com/ios/universal-links/) for
 implementation.
 
-- For Swift UI,
+-   For Swift UI,
 
 ```swift
 func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
@@ -149,7 +149,7 @@ func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
 }
 ```
 
-- For Storyboard,
+-   For Storyboard,
 
 ```swift
 func application(_ application: UIApplication, continue userActivity: UIUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
@@ -170,7 +170,7 @@ spun up on the testnet today!
 
 ## Requirements
 
-- Swift 5
+-   Swift 5
 
 ## Using CustomAuthFactory
 
@@ -194,11 +194,11 @@ let tdsdk = CustomAuth(
 
 ## 💬 Troubleshooting and Discussions
 
-- Have a look at our
-  [GitHub Discussions](https://github.com/Web3Auth/Web3Auth/discussions?discussions_q=sort%3Atop)
-  to see if anyone has any questions or issues you might be having.
-- Checkout our
-  [Troubleshooting Documentation Page](https://web3auth.io/docs/troubleshooting)
-  to know the common issues and solutions
-- Join our [Discord](https://discord.gg/web3auth) to join our community and get
-  private integration support or help with your integration.
+-   Have a look at our
+    [GitHub Discussions](https://github.com/Web3Auth/Web3Auth/discussions?discussions_q=sort%3Atop)
+    to see if anyone has any questions or issues you might be having.
+-   Checkout our
+    [Troubleshooting Documentation Page](https://web3auth.io/docs/troubleshooting)
+    to know the common issues and solutions
+-   Join our [Discord](https://discord.gg/web3auth) to join our community and get
+    private integration support or help with your integration.
